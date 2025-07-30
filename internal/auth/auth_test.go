@@ -28,7 +28,7 @@ func TestAPIKeyMiddleware(t *testing.T) {
 		{
 			name:           "Valid API Key",
 			authHeader:     "ApiKey secret123",
-			expectedStatus: http.StatusBadGateway,
+			expectedStatus: http.StatusOK,
 		},
 		{
 			name:           "Missing API Key",
