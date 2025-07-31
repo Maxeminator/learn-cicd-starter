@@ -18,5 +18,23 @@ jobs:
         with:
           go-version: "1.23.0"
       
-      - name: Build Go
+      - name: Build binary
         run: scripts/buildprod.sh
+
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+
+      - name: Set up gcloud
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: true-episode-467607-t2
+          install_components: docker
+
+      - name: Push image to Artifact Registry
+        run: |
+          gcloud auth configure-docker europe-north2-docker.pkg.dev
+          gcloud builds submit \
+            --tag europe-north2-docker.pkg.dev/notely-467607/notely-ar-repo/notely:latest \
+            .
