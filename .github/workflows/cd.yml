@@ -29,7 +29,7 @@ jobs:
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@v2
         with:
-          project_id: true-episode-467607-t2
+          project_id: notely-467607
           install_components: docker
 
       - name: Push image to Artifact Registry
